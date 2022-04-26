@@ -4,10 +4,27 @@ html
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     title= title
     link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
-    link(rel='stylesheet', href='/stylesheets/font-awesome.min.css')
+    link(rel='stylesheet', href='/stylesheets/fontawesome.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
+
+    nav.navbar.navbar-default
+      .container-fluid
+        .navbar-header
+          a.navbar-brand(href='/')
+            img(alt='Brand', src='../images/photo-logos/photo-logos_transparent.png' ,width='50px')
+        form.form-inline.my-2.my-lg-0
+          input.form-control.mr-sm-2(type='search', placeholder='Search Topic', aria-label='Search')
+          button.btn.btn-outline-success.my-2.my-sm-0.input-group(type='submit') Search
+        a.inline-block(href='/login')
+          button.btn.btn-default.navbar-btn.navbar-right(type='button') Sign in
+
   body
-    block content
-    script(src='https://code.jquery.com/jquery-3.1.1.slim.min.js')
-    script(src='https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js')
-    script(src='/javascripts/bootstrap.min.js')
+   
+    .container    
+      block content
+
+      script(src='https://code.jquery.com/jquery-3.1.1.slim.min.js')
+      script(src='/javascripts/bootstrap.min.js')
+      script(src='https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js')
+      
+   

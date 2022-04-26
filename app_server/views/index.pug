@@ -4,3 +4,39 @@ block content
   h1= title
   p Welcome to #{title}
   p Welcome to my project
+  // Gallery
+  .row
+    .col-lg-4.col-md-12.mb-4.mb-lg-0
+      img.w-100.shadow-1-strong.rounded.mb-4(src='/images/image/keith-tanner-o3f7ns-TU3Q-unsplash.jpg', alt='Boat on Calm Water')
+      img.w-100.shadow-1-strong.rounded.mb-4(src='/images/image/gaspar-zaldo-gUUCt0CTWmQ-unsplash.jpg', alt='Wintry Mountain Landscape')
+    .col-lg-4.mb-4.mb-lg-0
+      img.w-100.shadow-1-strong.rounded.mb-4(src='/images/image/ehimetalor-akhere-unuabona-TCEbRDXqv5M-unsplash.jpg', alt='Mountains in the Clouds')
+      img.w-100.shadow-1-strong.rounded.mb-4(src='/images/image/aydin-hassan-ZAZWq2HN9dk-unsplash.jpg', alt='Boat on Calm Water')
+    .col-lg-4.mb-4.mb-lg-0
+      img.w-100.shadow-1-strong.rounded.mb-4(src='/images/image/peter-herrmann-Pih3VZdHSwI-unsplash.jpg', alt='Waves at Sea')
+      img.w-100.shadow-1-strong.rounded.mb-4(src='/images/image/kristaps-ungurs-CAXt2XD2XbI-unsplash.jpg', alt='Yosemite National Park')
+
+  // Button trigger modal
+  button.btn.btn-primary(type='button', data-toggle='modal', data-target='#popupImage')
+    | Launch demo modal
+  // - pop up window
+  #popupImage.modal.fade.bd-example-modal-lg(role='dialog', aria-labelledby='modalLabel', aria-hidden='true')
+    .modal-dialog.modal-lg(role='document')
+      .modal-content
+        .modal-header
+          h5#modalLabel.modal-title Modal title
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true') &times;
+        .modal-body
+          img.w-100.shadow-1-strong.rounded.mb-4(src='/images/image/kristaps-ungurs-CAXt2XD2XbI-unsplash.jpg', alt='Wintry Mountain Landscape')
+        .modal-footer
+          button.btn.btn-primary(type='button')
+            i.fa.fa-heart-o
+
+
+
+
+
+    
+
+      

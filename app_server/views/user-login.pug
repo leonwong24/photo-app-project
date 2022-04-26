@@ -1,0 +1,50 @@
+extends layout
+block content
+
+  // Pills navs
+  ul#ex1.nav.nav-pills.nav-justified.mb-3(role='tablist')
+    li.nav-item(role='presentation')
+      a#tab-login.nav-link.active(data-mdb-toggle='pill', href='/login', role='tab', aria-controls='pills-login', aria-selected='true') Login
+    li.nav-item(role='presentation')
+      a#tab-register.nav-link(data-mdb-toggle='pill', href='/register', role='tab', aria-controls='pills-register', aria-selected='false') Register
+  // Pills navs
+  // Pills content
+  .tab-content
+    #pills-login.tab-pane.fade.show.active(role='tabpanel', aria-labelledby='tab-login')
+      form
+        // Email input
+        .form-outline.mb-4
+          input#loginName.form-control(type='email')
+          label.form-label(for='loginName') Email or username
+        // Password input
+        .form-outline.mb-4
+          input#loginPassword.form-control(type='password')
+          label.form-label(for='loginPassword') Password
+        // Submit button
+        button.btn.btn-primary.btn-block.mb-4(type='submit') Sign in
+        // Register buttons
+        .text-center
+          p
+            | Not a member? 
+            a(href='/register') Register
+    #pills-register.tab-pane.fade(role='tabpanel', aria-labelledby='tab-register')
+      form
+        // Username input
+        .form-outline.mb-4
+          input#registerName.form-control(type='email')
+          label.form-label(for='registerName') Email or username
+        // Password input
+        .form-outline.mb-4
+          input#registerPassword.form-control(type='password')
+          label.form-label(for='registerPassword') Password
+        // Repeat Password input
+        .form-outline.mb-4
+          input#registerRepeatPassword.form-control(type='password')
+          label.form-label(for='registerRepeatPassword') Repeat password
+        // Submit button
+        button.btn.btn-primary.btn-block.mb-3(type='submit') Sign in
+  // Pills content
+
+  script(src='https://code.jquery.com/jquery-3.1.1.slim.min.js')
+  script(src='/javascripts/bootstrap.min.js')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js')
