@@ -1,0 +1,21 @@
+extends layout
+block content
+  
+  #popupImage.modal.fade(role='dialog', aria-labelledby='modalLabel', aria-hidden='true', tabindex="-1")
+    .modal-dialog.modal-dialog-scrollable.modal-xl(role='document')
+      .modal-content
+        .modal-header
+          h5#modalLabel.modal-title Image title
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true') &times;
+        .modal-body
+          img.w-100.shadow-1-strong.rounded.mb-4(src='/images/image/kristaps-ungurs-CAXt2XD2XbI-unsplash.jpg', alt='Wintry Mountain Landscape',height='95%')
+        .modal-footer
+          .container-fluid
+            .row
+              .col-md-4 Image meta data
+              .col-md-4
+              .col-md-4.ml-auto
+                button.btn.btn-secondary.float-right(type='button')
+                  svg.bi.bi-heart-fill(xmlns='http://www.w3.org/2000/svg', width='16', height='16', fill='currentColor', viewbox='0 0 16 16')
+                    path(fill-rule='evenodd', d='M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z')
