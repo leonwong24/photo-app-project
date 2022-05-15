@@ -16,6 +16,11 @@ router
     .route('/register')
     .post(ctrlUser.usersRegister)
 
+// user login
+router
+    .route('/login/:userid')
+    .get(ctrlUser.usersLogin)
+
 // users
 router
     .route('/users/:userid')

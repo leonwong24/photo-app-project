@@ -9,7 +9,7 @@ router.get('/', ctrlMain.index);
 /*GET user page. */
 router.get('/register', ctrlUser.userRegistration); 
 router.get('/login', ctrlUser.userLogin); 
-router.get('/user',ctrlUser.userLikes);
+router.get('/user/:query',ctrlUser.userLikes);
 
 /*GET Search Image result page. */
 router.get('/search/:query', ctrlImage.searchImage); 

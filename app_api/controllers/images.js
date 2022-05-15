@@ -80,8 +80,9 @@ const imagesUserLikeAction = function(req,res) {
                 res.json({error :err}) ; 
             }
             else{
-                res.send(user)
-                res.json(user)
+                res
+                    .status(201)
+                    .json(user)
             }
         }
     );
@@ -97,8 +98,9 @@ const imagesUserDislikeAction = function(req,res){
                 res.json({error :err}) ; 
             }
             else{
-                res.send(user)
-                res.json(user)
+                res
+                    .status(201)
+                    .json(user)
             }
         }
     );

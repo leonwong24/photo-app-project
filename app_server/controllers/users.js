@@ -19,7 +19,8 @@ const userLogin = function(req, res){
 
 //getUser
 const userLikes = function(req, res){
-    const userId = "626c29c1fa16f6216521de14";
+    //const userId = "626c29c1fa16f6216521de14";
+    const userId = req.params.query;
     const path = '/api/users/' +userId;
 
     const requestOptions = {
@@ -30,13 +31,15 @@ const userLikes = function(req, res){
     };
 
     request(requestOptions, (err, response, body) => { 
+        //console.log(body)
         _getImageList(req, res, body); 
     });
         
 };
 
 const _getImageList = function(req,res,responseBody){
-    var ImageList = {};
+    var ImageList = [];
+    //console.log(responseBody.userLikesId[0])
     for(let i = 0 ; i < responseBody.userLikesId.length; i ++){
         
         const path = 'https://api.unsplash.com/photos/'+responseBody.userLikesId[i]+'?client_id='+access_key;
@@ -48,18 +51,22 @@ const _getImageList = function(req,res,responseBody){
         };
 
         request(requestOptions,(err,response,body) => {
+            //console.log(body)
             if (err) { 
                 return console.log(err); 
             }else if(response.statusCode === 200){
                 //console.log(body);
-                ImageList[i]=body;
+                ImageList.push(body);
+                //console.log(ImageList)
+                if(i == responseBody.userLikesId.length -1 )
+                    _renderUserLikes(req,res,ImageList);
             }
             else{
                 console.log(response.statusCode);
             }
         });
     }
-    console.log(ImageList)
+    //console.log(ImageList)
     //_renderUserLikes(req,res,ImageList);
 };
 
@@ -67,7 +74,11 @@ const _getImageList = function(req,res,responseBody){
 const _renderUserLikes = function(req, res,responseBody){ 
     res.render('user', { 
         title: 'User likes',
-        imageList:[{
+        imageList: responseBody,
+        imageListStringy: JSON.stringify(responseBody)
+        
+        /*
+        [{
             imageId: "42fy1ZHJPuk",
             description: "A image",
             urls: {
@@ -163,7 +174,7 @@ const _renderUserLikes = function(req, res,responseBody){
                 focal_length: '85.0',
                 iso:100
             }
-        }]
+        }]*/
      }); 
 };
     
