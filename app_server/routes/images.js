@@ -8,6 +8,6 @@ router.get('/', function(req, res, next) {
 });
 
 /*GET Search Image result page. */
-router.get('/search', ctrlImage.searchImage); 
+router.get('/search/:query', ctrlImage.searchImage); 
 
 module.exports = router;

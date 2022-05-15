@@ -1,8 +1,48 @@
+const request = require('request');
+const access_key = "9mQVjOQwjLugOCxbZdsYTTaAjgWP6NtoAf-v90Xi7nY";
+const apiOptions = { 
+    server : 'http://localhost:3000' 
+}; 
+if (process.env.NODE_ENV === 'production') { 
+    apiOptions.server = 'https://polar-reef-50886.herokuapp.com/'; 
+}
+
+
+const searchImage = function(req,res){
+    const path = '/api/search/'+req.params.query;
+    const requestOptions = {
+        url : apiOptions.server + path,
+        method: 'GET',
+        json : {},
+        qs : {},
+    };
+
+    request(requestOptions,(err,response,body) => {
+        if (err) { 
+            return console.log(err); 
+        }else if(response.statusCode === 200){
+            //console.log(body.results[0].urls.regular);
+            //console.log(body.url);
+            //console.log(body.explanation);
+        }
+        else{
+            console.log(response.statusCode);
+        }
+        _renderSearchImage(req,res,body.results);
+    })
+};
+
 /* GET image title search  page */
-const searchImage = function(req, res){ 
+const _renderSearchImage = function(req, res,responseBody){ 
     res.render('search-Image', { 
         title: 'Search Image' ,
-        imageList:[{
+
+        //display search image result
+        imageList: responseBody,
+        imageListStringy: JSON.stringify(responseBody)
+        
+        
+        /*[{
             imageId: "42fy1ZHJPuk",
             width:5931,
 	        height:3988,
@@ -110,7 +150,7 @@ const searchImage = function(req, res){
                 focal_length: '85.0',
                 iso:100
             }
-        }]
+        }]*/
     }); 
 };
 

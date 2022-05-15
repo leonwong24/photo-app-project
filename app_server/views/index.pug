@@ -14,55 +14,8 @@ block content
         .card-columns
             each image in imageList
                 .card
-                    a(href='/image', data-toggle='modal', data-target='#popupImage')
+                    a.popUpImageLink(href='/image', data-toggle='modal', data-target='#popupImage')
                         img.card-img-top(src=image.urls.regular, alt=image.description)
-
-
-  //- 
-    .container
-      .row
-          .col-12y
-          .card-columns
-              .card
-                  a(href='/image', data-toggle='modal', data-target='#popupImage')
-                    img.card-img-top(src='/images/image/keith-tanner-o3f7ns-TU3Q-unsplash.jpg', alt="Image")
-              .card
-                  a(href='/image', data-toggle='modal', data-target='#popupImage')
-                    img.card-img-top(src='/images/image/gaspar-zaldo-gUUCt0CTWmQ-unsplash.jpg', alt="Image")
-              .card
-                  a(href='/image', data-toggle='modal', data-target='#popupImage')
-                    img.card-img-top(src='/images/image/ehimetalor-akhere-unuabona-TCEbRDXqv5M-unsplash.jpg', alt="Image")
-              .card
-                  a(href='/image', data-toggle='modal', data-target='#popupImage')
-                    img.card-img-top(src='/images/image/aydin-hassan-ZAZWq2HN9dk-unsplash.jpg', alt="Image")
-              .card
-                  a(href='/image', data-toggle='modal', data-target='#popupImage')
-                    img.card-img-top(src='/images/image/peter-herrmann-Pih3VZdHSwI-unsplash.jpg', alt="Image")
-              .card
-                  a(href='/image', data-toggle='modal', data-target='#popupImage')
-                    img.card-img-top(src='/images/image/kristaps-ungurs-CAXt2XD2XbI-unsplash.jpg', alt="Image")*/
-
-
-  //-
-    .row
-      .col-lg-4.col-md-12.mb-4.mb-lg-0
-        a(href=)
-
-
-    .col-lg-4.col-md-12.mb-4.mb-lg-0
-      a(href='#', data-toggle='modal', data-target='#popupImage')
-        img.w-100.shadow-1-strong.rounded.mb-4(src='/images/image/keith-tanner-o3f7ns-TU3Q-unsplash.jpg', alt='Boat on Calm Water')
-
-
-      img.w-100.shadow-1-strong.rounded.mb-4(src='/images/image/gaspar-zaldo-gUUCt0CTWmQ-unsplash.jpg', alt='Wintry Mountain Landscape')
-    .col-lg-4.col-md-12.mb-4.mb-lg-0
-      img.w-100.shadow-1-strong.rounded.mb-4(src='/images/image/ehimetalor-akhere-unuabona-TCEbRDXqv5M-unsplash.jpg', alt='Mountains in the Clouds')
-
-      img.w-100.shadow-1-strong.rounded.mb-4(src='/images/image/aydin-hassan-ZAZWq2HN9dk-unsplash.jpg', alt='Boat on Calm Water')
-    .col-lg-4.col-md-12.mb-4.mb-lg-0
-      img.w-100.shadow-1-strong.rounded.mb-4(src='/images/image/peter-herrmann-Pih3VZdHSwI-unsplash.jpg', alt='Waves at Sea')
-
-      img.w-100.shadow-1-strong.rounded.mb-4(src='/images/image/kristaps-ungurs-CAXt2XD2XbI-unsplash.jpg', alt='Yosemite National Park') 
 
   // Button trigger modal
   //button.btn.btn-primary(type='button', data-toggle='modal', data-target='#popupImage')
@@ -76,18 +29,19 @@ block content
           button.close(type='button', data-dismiss='modal', aria-label='Close')
             span(aria-hidden='true') &times;
         .modal-body
-          img.w-100.shadow-1-strong.rounded.mb-4.img-fluid(src=imageList[8].urls.regular, alt='Wintry Mountain Landscape', style='object-fit')
+          img#modalImage.w-100.shadow-1-strong.rounded.mb-4.img-fluid(src=imageList[8].urls.regular, alt='Wintry Mountain Landscape', style='object-fit')
         .modal-footer
           .container-fluid
             .row
-              .col-md-4 
-                p Make #{imageList[8].exif.make}
-                p Model #{imageList[8].exif.model}
-                p Name #{imageList[8].exif.name}
-                p Exposure Time #{imageList[8].exif.exposure_time}
-                p Aperture #{imageList[8].exif.aperture}
-                p Focal Length #{imageList[8].exif.focal_length}
-                p Iso #{imageList[8].exif.iso}
+              #metaData.col-md-4 
+                //p#make Make 
+                //p#model Model 
+                //p#name Name 
+                //p#exposure Exposure Time 
+                //p#aperture Aperture 
+                //p#focal Focal Length 
+                //p#iso Iso 
+
               .col-md-4
               .col-md-4.ml-auto
                 button.btn.btn-secondary.float-right(type='button')
@@ -96,6 +50,33 @@ block content
 
 
             //i.fa.fa-heart-o
+  script.
+        var imageList = !{imageListStringy};
+        var popUps = document.getElementsByClassName('popUpImageLink')
+
+        for (var i= 0 ; i < popUps.length; i++){
+            //set image index to each link
+            popUps[i].setAttribute('image-index',i);
+            popUps[i].addEventListener('click',popUpClicked);
+        }
+        function popUpClicked(event){
+            var image = event.currentTarget;
+            var index = image.getAttribute('image-index');
+
+            var popUpImageTitle = document.getElementById('modalLabel');
+            var popUpImageSource = document.getElementById('modalImage');
+            var popUpImageMetaData = document.getElementById('metaData');
+            
+            
+            popUpImageTitle.innerHTML = imageList[index].description;
+            popUpImageSource.src = imageList[index].urls.regular;
+            popUpImageSource.alt = imageList[index].alt_description;
+           
+        }
+
+
+
+    
 
 
           

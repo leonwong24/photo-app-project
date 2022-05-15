@@ -6,9 +6,9 @@ block content
             .row
                 .col-12
                 .card-columns
-                    each image in imageList
+                    each image,index in imageList
                         .card
-                            a(href='/image', data-toggle='modal', data-target='#popupImage')
+                            a.popUpImageLink(href='/image/', data-toggle='modal', data-target='#popupImage')
                                 img.card-img-top(src=image.urls.regular, alt=image.description)
 
         
@@ -16,17 +16,46 @@ block content
         .modal-dialog.modal-xl(role='document')
         .modal-content
             .modal-header
-                h5#modalLabel.modal-title Image title
+                h5#modalLabel.modal-title #{imageList[4].description}
                 button.close(type='button', data-dismiss='modal', aria-label='Close')
                     span(aria-hidden='true') &times;
             .modal-body
-                img.w-100.shadow-1-strong.rounded.mb-4.img-fluid(src=imageList[4].urls.regular, alt='Wintry Mountain Landscape', style='object-fit')
+                img#modalImage.w-100.shadow-1-strong.rounded.mb-4.img-fluid(src=imageList[4].urls.regular, alt=imageList[4].urls.alt_description, style='object-fit')
             .modal-footer
                 .container-fluid
                     .row
-                        .col-md-4 Image meta data
+                        #metaData.col-md-4 
+                            // p Make #{imageList[8].exif.make}
+                            // p Model #{imageList[8].exif.model}
+                            // p Name #{imageList[8].exif.name}
+                            // p Exposure Time #{imageList[8].exif.exposure_time}
+                            // p Aperture #{imageList[8].exif.aperture}
+                            // p Focal Length #{imageList[8].exif.focal_length}
+                            // p Iso #{imageList[8].exif.iso}
                         .col-md-4
                         .col-md-4.ml-auto
                             button.btn.btn-secondary.float-right(type='button')
                                 svg.bi.bi-heart-fill(xmlns='http://www.w3.org/2000/svg', width='16', height='16', fill='currentColor', viewbox='0 0 16 16')
                                     path(fill-rule='evenodd', d='M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z')
+
+    script.
+        var imageList = !{imageListStringy};
+        var popUps = document.getElementsByClassName('popUpImageLink')
+
+        for (var i= 0 ; i < popUps.length; i++){
+            //set image index to each link
+            popUps[i].setAttribute('image-index',i);
+            popUps[i].addEventListener('click',popUpClicked);
+        }
+        function popUpClicked(event){
+            var image = event.currentTarget;
+            var index = image.getAttribute('image-index');
+
+            var popUpImageTitle = document.getElementById('modalLabel');
+            var popUpImageSource = document.getElementById('modalImage');
+            //var popUpImageMetaData = document.getElementById('metaData');
+
+            popUpImageTitle.innerHTML = imageList[index].description;
+            popUpImageSource.src = imageList[index].urls.regular;
+            popUpImageSource.alt = imageList[index].alt_description;
+        }

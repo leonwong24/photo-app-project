@@ -1,3 +1,12 @@
+const request = require('request');
+const access_key = "9mQVjOQwjLugOCxbZdsYTTaAjgWP6NtoAf-v90Xi7nY";
+const apiOptions = { 
+    server : 'http://localhost:3000' 
+}; 
+if (process.env.NODE_ENV === 'production') { 
+    apiOptions.server = 'https://polar-reef-50886.herokuapp.com/'; 
+}
+
 /* GET user registration page */
 const userRegistration = function(req, res){ 
     res.render('user-register', { title: 'User Register' }); 
@@ -8,8 +17,54 @@ const userLogin = function(req, res){
     res.render('user-login', { title: 'Login' }); 
 };
 
+//getUser
+const userLikes = function(req, res){
+    const userId = "626c29c1fa16f6216521de14";
+    const path = '/api/users/' +userId;
+
+    const requestOptions = {
+        url : apiOptions.server + path, 
+        method : 'GET', 
+        json : {}, 
+        qs : {}
+    };
+
+    request(requestOptions, (err, response, body) => { 
+        _getImageList(req, res, body); 
+    });
+        
+};
+
+const _getImageList = function(req,res,responseBody){
+    var ImageList = {};
+    for(let i = 0 ; i < responseBody.userLikesId.length; i ++){
+        
+        const path = 'https://api.unsplash.com/photos/'+responseBody.userLikesId[i]+'?client_id='+access_key;
+        const requestOptions = {
+            url : path,
+            method: 'GET',
+            json : {},
+            qs : {},
+        };
+
+        request(requestOptions,(err,response,body) => {
+            if (err) { 
+                return console.log(err); 
+            }else if(response.statusCode === 200){
+                //console.log(body);
+                ImageList[i]=body;
+            }
+            else{
+                console.log(response.statusCode);
+            }
+        });
+    }
+    console.log(ImageList)
+    //_renderUserLikes(req,res,ImageList);
+};
+
 /*GET user image like page */
-const userLikes = function(req, res){ 
+const _renderUserLikes = function(req, res,responseBody){ 
     res.render('user', { 
         title: 'User likes',
         imageList:[{

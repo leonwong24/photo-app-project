@@ -12,7 +12,7 @@ router.get('/login', ctrlUser.userLogin);
 router.get('/user',ctrlUser.userLikes);
 
 /*GET Search Image result page. */
-router.get('/search', ctrlImage.searchImage); 
+router.get('/search/:query', ctrlImage.searchImage); 
 
 /*GET Pop Up image page. */
 //router.get('/image', ctrlImage.selectImage);
