@@ -4,7 +4,7 @@ const apiOptions = {
     server : 'http://localhost:3000' 
 }; 
 if (process.env.NODE_ENV === 'production') { 
-    apiOptions.server = 'https://polar-reef-50886.herokuapp.com/'; 
+    apiOptions.server = 'https://polar-reef-50886.herokuapp.com'; 
 }
 
 const index = function(req,res){
